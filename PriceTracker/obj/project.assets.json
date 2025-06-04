@@ -4452,23 +4452,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dhruv\\.nuget\\packages\\": {},
+    "C:\\Users\\dhruv\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Web Dev\\Sem2\\Back-End Web Development 2\\PriceTracker\\PriceTracker\\PriceTracker\\PriceTracker.csproj",
+      "projectUniqueName": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\PriceTracker.csproj",
       "projectName": "PriceTracker",
-      "projectPath": "C:\\Web Dev\\Sem2\\Back-End Web Development 2\\PriceTracker\\PriceTracker\\PriceTracker\\PriceTracker.csproj",
-      "packagesPath": "C:\\Users\\Dhruv\\.nuget\\packages\\",
-      "outputPath": "C:\\Web Dev\\Sem2\\Back-End Web Development 2\\PriceTracker\\PriceTracker\\PriceTracker\\obj\\",
+      "projectPath": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\PriceTracker.csproj",
+      "packagesPath": "C:\\Users\\dhruv\\.nuget\\packages\\",
+      "outputPath": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Dhruv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dhruv\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4495,7 +4495,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -4541,7 +4541,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

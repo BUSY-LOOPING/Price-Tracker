@@ -28,4 +28,27 @@ namespace PriceTracker.Models
         // Many-to-Many with Category via ProductCategory
         public ICollection<ProductCategory>? ProductCategories { get; set; }
     }
+
+    public class ProductDto
+    {
+        public int ProductId { get; set; }
+
+        public string Name { get; set; }
+
+        public string Url { get; set; }
+
+        public string? Description { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public string CompanyName { get; set; }
+
+        // Most recent price info
+        public decimal? LatestPrice { get; set; }
+        public DateTime? LatestPriceRecordedAt { get; set; }
+        public string? LatestPriceSource { get; set; }
+    }
+
 }
