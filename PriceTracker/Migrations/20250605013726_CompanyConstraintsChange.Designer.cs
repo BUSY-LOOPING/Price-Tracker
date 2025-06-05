@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PriceTracker.Data;
 
@@ -11,9 +12,11 @@ using PriceTracker.Data;
 namespace PriceTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250605013726_CompanyConstraintsChange")]
+    partial class CompanyConstraintsChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -486,7 +489,7 @@ namespace PriceTracker.Migrations
             modelBuilder.Entity("PriceTracker.Models.ProductTag", b =>
                 {
                     b.HasOne("PriceTracker.Models.Product", "Product")
-                        .WithMany("ProductTags")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -517,8 +520,6 @@ namespace PriceTracker.Migrations
                     b.Navigation("PriceEntries");
 
                     b.Navigation("ProductCategories");
-
-                    b.Navigation("ProductTags");
                 });
 
             modelBuilder.Entity("PriceTracker.Models.Tag", b =>

@@ -1,50 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\",
+  "WorkspaceRootPath": "C:\\Web Dev\\Sem2\\PriceTracker\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\controllers\\productsapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\web dev\\sem2\\pricetracker\\pricetracker\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\web dev\\sem2\\pricetracker\\pricetracker\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\web dev\\sem2\\pricetracker\\pricetracker\\models\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\web dev\\sem2\\pricetracker\\pricetracker\\controllers\\productsapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\controllers\\productsapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\priceentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\priceentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\web dev\\sem2\\pricetracker\\pricetracker\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\models\\producttag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\models\\producttag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\humber\\web dev - sem2\\price-tracker\\pricetracker\\migrations\\20250602060219_tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\migrations\\20250602060219_tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|c:\\web dev\\sem2\\pricetracker\\pricetracker\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{858103BC-57BA-47D6-84B4-F8E2496B4A86}|PriceTracker\\PriceTracker.csproj|solutionrelative:pricetracker\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,160 +34,106 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Category.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\Category.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Category.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Models\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "PriceTracker\\Models\\ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Models\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "PriceTracker\\Models\\ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T04:47:17.079Z",
-              "IsPinned": true,
+              "WhenOpened": "2025-06-05T23:10:59.431Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductsAPIController.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Controllers\\ProductsAPIController.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Controllers\\ProductsAPIController.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Controllers\\ProductsAPIController.cs",
-              "RelativeToolTip": "PriceTracker\\Controllers\\ProductsAPIController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T20:27:19.714Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "PriceTracker\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "PriceTracker\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-05T23:06:50.496Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\Product.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Product.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\Product.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAA7wDQAAAAAAAAAAAAAAA==",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "PriceTracker\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "PriceTracker\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAwwCgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T20:22:44.484Z",
+              "WhenOpened": "2025-06-05T23:06:00.816Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "PriceTracker\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABMAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Program.cs",
+              "RelativeDocumentMoniker": "PriceTracker\\Program.cs",
+              "ToolTip": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Program.cs",
+              "RelativeToolTip": "PriceTracker\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T04:49:50.815Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PriceEntry.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\PriceEntry.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\PriceEntry.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\PriceEntry.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\PriceEntry.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAkwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T04:46:11.239Z",
+              "WhenOpened": "2025-06-05T22:52:11.391Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Company.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Company.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\Company.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Company.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\Company.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAkwBcAAAAAAAAAAAAAAA==",
+              "Title": "ProductsAPIController.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Controllers\\ProductsAPIController.cs",
+              "RelativeDocumentMoniker": "PriceTracker\\Controllers\\ProductsAPIController.cs",
+              "ToolTip": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Controllers\\ProductsAPIController.cs",
+              "RelativeToolTip": "PriceTracker\\Controllers\\ProductsAPIController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T04:38:12.064Z",
+              "WhenOpened": "2025-06-05T22:50:54.011Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "3a840a08-2ae7-484a-a07b-2a1eb06b977b",
+        "Display": 2,
+        "X": 54,
+        "Y": 140,
+        "Width": 1202,
+        "Height": 682,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProductCategory.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\ProductCategory.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\ProductCategory.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\ProductCategory.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\ProductCategory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "PriceTracker\\Models\\Category.cs",
+              "ToolTip": "C:\\Web Dev\\Sem2\\PriceTracker\\PriceTracker\\Models\\Category.cs",
+              "RelativeToolTip": "PriceTracker\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T04:48:16.01Z",
+              "WhenOpened": "2025-06-05T22:58:21.593Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ApplicationDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "RelativeToolTip": "PriceTracker\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAKMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T20:17:54.485Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Tag.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Tag.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\Tag.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\Tag.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\Tag.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T05:48:35.939Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ProductTag.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\ProductTag.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Models\\ProductTag.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Models\\ProductTag.cs",
-              "RelativeToolTip": "PriceTracker\\Models\\ProductTag.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T05:50:02.024Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "20250602060219_Tag.cs",
-              "DocumentMoniker": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Migrations\\20250602060219_Tag.cs",
-              "RelativeDocumentMoniker": "PriceTracker\\Migrations\\20250602060219_Tag.cs",
-              "ToolTip": "C:\\Humber\\Web Dev - Sem2\\Price-Tracker\\PriceTracker\\Migrations\\20250602060219_Tag.cs",
-              "RelativeToolTip": "PriceTracker\\Migrations\\20250602060219_Tag.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T06:02:19.931Z"
             }
           ]
         }

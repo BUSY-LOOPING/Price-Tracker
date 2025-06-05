@@ -8,11 +8,12 @@ namespace PriceTracker.Models
     public class ProductTag
     {
         //[Key, Column(Order = 0)]
+        [Required]
 
         public int ProductId { get; set; }
 
         //[Key, Column(Order = 1)]
-
+        [Required]
         public int TagId { get; set; }
 
         public string? TagSource { get; set; } // "User", "Admin", "Automated"
@@ -22,5 +23,14 @@ namespace PriceTracker.Models
         public virtual Tag Tag { get; set; }
 
 
+    }
+
+    public class TagDto
+    {
+        [Required]
+        public int TagId { get; set; }
+        [Required]
+        [StringLength(30)]
+        public string Name { get; set; }
     }
 }

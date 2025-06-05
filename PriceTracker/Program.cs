@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using PriceTracker.Controllers;
 using PriceTracker.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ProductsAPIController>();
+builder.Services.AddScoped<PriceEntryAPIController>();
+builder.Services.AddScoped<TagsAPIController>();
+
+builder.Services.AddControllers();
+
 
 var app = builder.Build();
 

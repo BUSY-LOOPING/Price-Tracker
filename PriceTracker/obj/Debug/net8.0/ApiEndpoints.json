@@ -1,8 +1,166 @@
 [
   {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "CreatePriceEntry",
+    "RelativePath": "api/price-entries/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.PriceEntryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "DeletePriceEntry",
+    "RelativePath": "api/price-entries/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "GetPriceEntry",
+    "RelativePath": "api/price-entries/get",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PriceTracker.Models.PriceEntryDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "GetPriceEntriesForProduct",
+    "RelativePath": "api/price-entries/product",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PriceTracker.Models.PriceEntryDto, PriceTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "UpdatePriceEntry",
+    "RelativePath": "api/price-entries/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.PriceEntryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/products/add-product",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.CreateProductDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
+    "Method": "DeleteProduct",
+    "RelativePath": "api/products/delete-product",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
+    "Method": "LinkProductToCategory",
+    "RelativePath": "api/products/link-product-to-category",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "categoryName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
     "Method": "GetProducts",
-    "RelativePath": "api/ProductsAPI/products",
+    "RelativePath": "api/products/products",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -18,5 +176,146 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
+    "Method": "UnlinkProductFromCategory",
+    "RelativePath": "api/products/unlink-product-from-category",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "categoryName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
+    "Method": "UpdateProduct",
+    "RelativePath": "api/products/update-product",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.CreateProductDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "Method": "CreateTag",
+    "RelativePath": "api/tags/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.TagDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "Method": "DeleteTag",
+    "RelativePath": "api/tags/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "Method": "GetTag",
+    "RelativePath": "api/tags/get",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PriceTracker.Models.TagDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "Method": "GetTags",
+    "RelativePath": "api/tags/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PriceTracker.Models.TagDto, PriceTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "Method": "UpdateTag",
+    "RelativePath": "api/tags/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.TagDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

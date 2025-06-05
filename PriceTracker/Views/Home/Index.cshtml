@@ -1,8 +1,159 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model PriceTracker.Models.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <!-- ================= ITEMS Section ================= -->
+    <h3 class="mb-3">Items</h3>
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span>Items</span>
+            <a href="#" class="btn btn-sm btn-outline-primary">+ Create New Product</a>
+        </div>
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Current Price</th>
+                        <th scope="col">Last Recorded</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TopThreeProducts.Any())
+                    {
+                        foreach (var item in Model.TopThreeProducts)
+                        {
+                            <tr>
+                                <td>@item.ProductId</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    @if (item.LatestPrice.HasValue)
+                                    {
+                                        @item.LatestPrice.Value.ToString("C")
+                                    }
+                                    else
+                                    {
+                                        <em>—</em>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.LatestPriceRecordedAt.HasValue)
+                                    {
+                                        @item.LatestPriceRecordedAt.Value.ToString("MM/dd/yyyy")
+                                    }
+                                    else
+                                    {
+                                        <em>—</em>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="#" class="btn btn-success">Update Price</a>
+                                        <a href="#" class="btn btn-warning">Edit</a>
+                                        <a href="#" class="btn btn-danger">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-4">
+                                <em>No items to display.</em>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-start">
+            <a href="#" class="btn btn-primary">View All Items</a>
+        </div>
+    </div>
+
+    <!-- ================= CATEGORIES Section  ================= -->
+    <h3 class="mb-3">Categories</h3>
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span>Categories</span>
+            <a href="#" class="btn btn-sm btn-outline-primary">+ Create New Category</a>
+        </div>
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col"># of Items</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            <em>Categories not available yet.</em>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-start">
+            <a href="#" class="btn btn-primary">View All Categories</a>
+        </div>
+    </div>
+
+    <!-- ================= TAGS Section ================= -->
+    <h3 class="mb-3">Tags</h3>
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span>Tags</span>
+            <a href="#" class="btn btn-sm btn-outline-primary">+ Create New Tag</a>
+        </div>
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tag Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TopThreeTags.Any())
+                    {
+                        foreach (var tag in Model.TopThreeTags)
+                        {
+                            <tr>
+                                <td>@tag.TagId</td>
+                                <td>@tag.Name</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="#" class="btn btn-warning">Edit</a>
+                                        <a href="#" class="btn btn-danger">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center py-4">
+                                <em>No tags to display.</em>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-start">
+            <a href="#" class="btn btn-primary">View All Tags</a>
+        </div>
+    </div>
 </div>
