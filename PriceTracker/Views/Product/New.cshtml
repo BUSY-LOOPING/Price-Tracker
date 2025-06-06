@@ -1,0 +1,147 @@
+﻿@model PriceTracker.Models.ViewModels.NewProductViewModel
+@{
+    ViewData["Title"] = $"New Item";
+    Layout = "_Layout";
+}
+
+
+<div class="container mt-5">
+    <h2>Create New Item</h2>
+    <form asp-action="New" asp-controller="Product" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Url" class="form-label"></label>
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="CompanyName" class="form-label"></label>
+            <input asp-for="CompanyName" class="form-control" />
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="LatestPrice" class="form-label"></label>
+            <input asp-for="LatestPrice" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="LatestPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label asp-for="LatestPriceSource" class="form-label"></label>
+            <input asp-for="LatestPriceSource" class="form-control" />
+            <span asp-validation-for="LatestPriceSource" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="tagInput" class="form-label">Tags</label>
+            <input type="text" id="tagInput" class="form-control" placeholder="Type a tag and press Enter" />
+
+            <div id="tagChips" class="mt-2"></div>
+
+            @* Hidden field to hold tags for submission *@
+            <input type="hidden" name="Tags" id="TagsSerialized" />
+            <span asp-validation-for="Tags" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group mb-4">
+            <label for="categoryInput" class="form-label">Categories</label>
+            <input type="text" id="categoryInput" class="form-control" placeholder="Type a category and press Enter" />
+
+            <div id="categoryChips" class="mt-2"></div>
+
+            <input type="hidden" name="CategoryNames" id="CategoryNamesSerialized" />
+            <span asp-validation-for="CategoryNames" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Create Item</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        let categories = [];
+        let tags = [];
+
+        const categoryInput = document.getElementById('categoryInput');
+        const tagInput = document.getElementById('tagInput');
+        const categoryChipsContainer = document.getElementById('categoryChips');
+        const tagChipsContainer = document.getElementById('tagChips');
+        const categoryHiddenInput = document.getElementById('CategoryNamesSerialized');
+        const tagsHiddenInput = document.getElementById('TagsSerialized');
+
+        function updateHiddenInputs() {
+            categoryHiddenInput.value = JSON.stringify(categories);
+            tagsHiddenInput.value = JSON.stringify(tags);
+        }
+
+        function renderChips(items, container, onRemove) {
+            container.innerHTML = '';
+            items.forEach((item, index) => {
+                const chip = document.createElement('span');
+                chip.className = 'badge bg-success me-2 mb-2';
+                chip.textContent = item;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.className = 'btn-close btn-close-white btn-sm ms-2';
+                removeBtn.setAttribute('aria-label', 'Remove');
+                removeBtn.onclick = () => {
+                    onRemove(index);
+                    renderChips(items, container, onRemove);
+                    updateHiddenInputs();
+                };
+
+                chip.appendChild(removeBtn);
+                container.appendChild(chip);
+            });
+        }
+
+        categoryInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = categoryInput.value.trim();
+                if (value && !categories.includes(value)) {
+                    categories.push(value);
+                    renderChips(categories, categoryChipsContainer, (i) => categories.splice(i, 1));
+                    updateHiddenInputs();
+                    categoryInput.value = '';
+                }
+            }
+        });
+
+        tagInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = tagInput.value.trim();
+                if (value && !tags.includes(value)) {
+                    tags.push(value);
+                    renderChips(tags, tagChipsContainer, (i) => tags.splice(i, 1));
+                    updateHiddenInputs();
+                    tagInput.value = '';
+                }
+            }
+        });
+
+        // Sync hidden fields on form submit
+        document.querySelector('form').addEventListener('submit', () => {
+            updateHiddenInputs();
+        });
+    </script>
+}
+

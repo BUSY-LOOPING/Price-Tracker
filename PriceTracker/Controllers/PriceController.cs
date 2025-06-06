@@ -119,7 +119,6 @@ namespace PriceTracker.Controllers
                 return View(vm);
             }
 
-            // Build a PriceEntryDto to pass to the API
             var newDto = new PriceEntryDto
             {
                 ProductId = vm.ProductId,
@@ -127,16 +126,14 @@ namespace PriceTracker.Controllers
                 Source = vm.NewPriceSource,
             };
 
-            // Call the API’s Create method
+            
             var createResponse = await _priceEntriesApi.CreatePriceEntry(newDto);
-            // If creation failed, re-display the form with an error
             if (createResponse is BadRequestObjectResult badReq)
             {
                 ModelState.AddModelError(string.Empty, "Failed to add new price entry.");
                 return View(vm);
             }
 
-            // Otherwise, redirect back to GET so the chart refreshes
             return RedirectToAction(nameof(Update), new { productId = vm.ProductId });
         }
     }
