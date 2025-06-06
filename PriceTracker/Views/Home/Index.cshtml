@@ -53,7 +53,12 @@
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="#" class="btn btn-success">Update Price</a>
+                                        <a asp-controller="Price"
+                                           asp-action="Update"
+                                           asp-route-productId="@item.ProductId"
+                                           class="btn btn-success">
+                                            Update Price
+                                        </a>
                                         <a href="#" class="btn btn-warning">Edit</a>
                                         <a href="#" class="btn btn-danger">Delete</a>
                                     </div>

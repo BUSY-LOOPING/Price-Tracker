@@ -23,7 +23,6 @@ namespace PriceTracker.Controllers
         {
             var vm = new DashboardViewModel();
 
-            // Load Products (unchanged)…
             var prodResponse = await _productsApi.GetProducts();
             IEnumerable<ProductDto> allProducts = null;
 
