@@ -10,6 +10,8 @@ namespace PriceTracker.Models
         [Required]
         public string Name { get; set; }
 
+        public string? Description { get; set; }
+
         public int PopularityScore { get; set; } = 0; // Useful for trending searches
 
         public bool IsActive { get; set; } = true; // If tag is currently used: for soft deletes

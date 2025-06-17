@@ -1,19 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿ using System.ComponentModel.DataAnnotations;
 
 namespace PriceTracker.Models
 {
+
+    public enum ProductCondition
+    {
+        New,
+        Used,
+        Refurbished,
+        Damaged
+    }
+
     public class Product
     {
         [Key]
         public int ProductId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required]
-        public string Url { get; set; }
+        public required string Url { get; set; }
 
-        public string Description { get; set; }
+        [EnumDataType(typeof(ProductCondition), ErrorMessage = "Invalid condition selected.")]
+        public string? Condition { get; set; }
+
+        public string? Description { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }

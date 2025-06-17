@@ -16,12 +16,9 @@ namespace PriceTracker.Models
         [Required]
         public int TagId { get; set; }
 
-        public string? TagSource { get; set; } // "User", "Admin", "Automated"
-
         public virtual Product Product { get; set; }
 
         public virtual Tag Tag { get; set; }
-
 
     }
 

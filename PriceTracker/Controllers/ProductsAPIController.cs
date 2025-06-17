@@ -112,7 +112,6 @@ namespace PriceTracker.Controllers
                 {
                     ProductId = product.ProductId,
                     TagId = tag.TagId,
-                    TagSource = dto.TagSource
                 });
             }
             await _context.SaveChangesAsync();
