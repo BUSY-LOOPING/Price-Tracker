@@ -19,4 +19,17 @@ namespace PriceTracker.Models
         // Many-to-Many with Product via ProductTag
         public ICollection<ProductCategory>? ProductCategories { get; set; }
     }
+
+    public class TagDto
+    {
+        public int TagId { get; set; }
+        public required string Name { get; set; }
+
+    }
+
+    public class CreateTagDto
+    {
+        public string Name { get; set; }
+        public string? Description { get; set; }
+    }
 }

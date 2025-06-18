@@ -21,13 +21,4 @@ namespace PriceTracker.Models
         public virtual Tag Tag { get; set; }
 
     }
-
-    public class TagDto
-    {
-        [Required]
-        public int TagId { get; set; }
-        [Required]
-        [StringLength(30)]
-        public string Name { get; set; }
-    }
 }

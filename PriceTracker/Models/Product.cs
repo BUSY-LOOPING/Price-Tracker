@@ -46,58 +46,63 @@ namespace PriceTracker.Models
     public class ProductDto
     {
         public int ProductId { get; set; }
-
         public string Name { get; set; }
-
         public string Url { get; set; }
-
+        public string? Condition { get; set; }
         public string? Description { get; set; }
-
         public DateTime CreatedAt { get; set; }
 
         public int CompanyId { get; set; }
-
         public string CompanyName { get; set; }
 
-        // Most recent price info
+        // List of related categories (names only)
+        public List<string> Categories { get; set; } = new List<string>();
+
+        // List of tags (names only)
+        public List<string> Tags { get; set; } = new List<string>();
+
+        // Most recent price entry
         public decimal? LatestPrice { get; set; }
-        public DateTime? LatestPriceRecordedAt { get; set; }
         public string? LatestPriceSource { get; set; }
+        public DateTime? LatestPriceRecordedAt { get; set; }
+
+        // Metrics
+        public decimal? MaxPrice { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? AveragePrice { get; set; }
+        public decimal? PriceChangeSinceLast { get; set; }
+        public double? PriceChangePercentage { get; set; }
     }
+
 
     public class CreateProductDto
     {
         [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
+
+        public string? Description { get; set; }
 
         [Required]
-        [Url]
-        public string Url { get; set; }
+        public required string Url { get; set; }
 
-        [StringLength(500)]
-        public string Description { get; set; }
+        public string? Condition { get; set; }
 
         [Required]
+        public int CompanyId { get; set; }
+
         public string CompanyName { get; set; }
 
         [Required]
-        [Range(0.01, 1000000)]
         public decimal CurrentPrice { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string PriceSource { get; set; }
+        public required string PriceSource { get; set; }
 
         [Required]
-        [MinLength(1)]
-        public List<string> CategoryNames { get; set; }
+        public List<string>? CategoryNames { get; set; } = new List<string>();
 
         [Required]
-        [MinLength(1)]
-        public List<string> Tags { get; set; }
-
-        public string? TagSource { get; set; }
+        public List<string>? Tags { get; set; } = new List<string>();
     }
 
 

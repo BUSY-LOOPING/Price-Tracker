@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PriceTracker.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using PriceTracker.Interfaces;
 using PriceTracker.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PriceTracker.Controllers
 {
@@ -10,101 +10,74 @@ namespace PriceTracker.Controllers
     [ApiController]
     public class PriceEntryAPIController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPriceEntryService _service;
 
-        public PriceEntryAPIController(ApplicationDbContext context)
+        public PriceEntryAPIController(IPriceEntryService service)
         {
-            _context = context;
+            _service = service;
         }
 
-        [HttpPost("add")]
-        public async Task<ActionResult> CreatePriceEntry([FromBody] PriceEntryDto dto)
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<PriceEntryDto>>> GetAll()
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var priceEntry = new PriceEntry
-            {
-                ProductId = dto.ProductId,
-                Price = dto.Price,
-                Source = dto.Source,
-                RecordedAt = DateTime.UtcNow
-            };
-
-            _context.PriceEntries.Add(priceEntry);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Price entry added", id = priceEntry.EntryId });
-        }
-
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdatePriceEntry(int id, [FromBody] PriceEntryDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var entry = await _context.PriceEntries.FindAsync(id);
-            if (entry == null)
-                return NotFound($"Entry with ID {id} not found.");
-
-            entry.ProductId = dto.ProductId;
-            entry.Price = dto.Price;
-            entry.Source = dto.Source;
-            entry.RecordedAt = dto.RecordedAt;
-
-            await _context.SaveChangesAsync();
-            return Ok(new { message = $"Price entry ID {id} updated" });
-        }
-
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeletePriceEntry(int id)
-        {
-            var entry = await _context.PriceEntries.FindAsync(id);
-            if (entry == null)
-                return NotFound($"Entry with ID {id} not found.");
-
-            _context.PriceEntries.Remove(entry);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = $"Price entry {id} deleted" });
-        }
-
-        [HttpGet("get")]
-        public async Task<ActionResult<PriceEntryDto>> GetPriceEntry(int id)
-        {
-            var entry = await _context.PriceEntries.FindAsync(id);
-            if (entry == null)
-                return NotFound($"Entry with ID {id} not found.");
-
-            var dto = new PriceEntryDto
-            {
-                EntryId = entry.EntryId,
-                ProductId = entry.ProductId,
-                Price = entry.Price,
-                Source = entry.Source,
-                RecordedAt = entry.RecordedAt
-            };
-
-            return Ok(dto);
-        }
-
-        [HttpGet("product/")]
-        public async Task<ActionResult<IEnumerable<PriceEntryDto>>> GetPriceEntriesForProduct([FromQuery] int productId)
-        {
-            var entries = await _context.PriceEntries
-                .Where(pe => pe.ProductId == productId)
-                .OrderByDescending(pe => pe.RecordedAt)
-                .Select(pe => new PriceEntryDto
-                {
-                    EntryId = pe.EntryId,
-                    ProductId = pe.ProductId,
-                    Price = pe.Price,
-                    Source = pe.Source,
-                    RecordedAt = pe.RecordedAt
-                })
-                .ToListAsync();
-
+            var entries = await _service.GetAllAsync();
             return Ok(entries);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var response = await _service.GetByIdAsync(id);
+            if (response.Status == ServiceResponse<PriceEntryDto>.ServiceStatus.NotFound)
+                return NotFound(response.Messages);
+
+            return Ok(response.Data);
+        }
+
+        [HttpGet("product")]
+        public async Task<ActionResult<IEnumerable<PriceEntryDto>>> GetByProduct([FromQuery] int productId)
+        {
+            var entries = await _service.GetByProductIdAsync(productId);
+            return Ok(entries);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] PriceEntryDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var response = await _service.CreateAsync(dto);
+            if (response.Status == ServiceResponse<PriceEntryDto>.ServiceStatus.Error)
+                return BadRequest(response.Messages);
+
+            return CreatedAtAction(nameof(Get), new { id = response.CreatedId }, response.Data);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] PriceEntryDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var response = await _service.UpdateAsync(id, dto);
+            return response.Status switch
+            {
+                ServiceResponse<PriceEntryDto>.ServiceStatus.NotFound => NotFound(response.Messages),
+                ServiceResponse<PriceEntryDto>.ServiceStatus.Error => BadRequest(response.Messages),
+                ServiceResponse<PriceEntryDto>.ServiceStatus.Updated => Ok(response.Data),
+                _ => BadRequest()
+            };
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _service.DeleteAsync(id);
+            return response.Status switch
+            {
+                ServiceResponse<PriceEntryDto>.ServiceStatus.NotFound => NotFound(response.Messages),
+                ServiceResponse<PriceEntryDto>.ServiceStatus.Deleted => Ok(response.Data),
+                _ => BadRequest(response.Messages)
+            };
         }
     }
 }

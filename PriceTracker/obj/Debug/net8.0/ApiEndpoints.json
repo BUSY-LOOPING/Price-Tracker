@@ -1,8 +1,87 @@
 [
   {
+    "ContainingType": "PriceTracker.Controllers.CategoriesController",
+    "Method": "Create",
+    "RelativePath": "api/categories/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.CreateCategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.CategoriesController",
+    "Method": "Delete",
+    "RelativePath": "api/categories/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.CategoriesController",
+    "Method": "GetAll",
+    "RelativePath": "api/categories/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.CategoriesController",
+    "Method": "Get",
+    "RelativePath": "api/categories/get/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.CategoriesController",
+    "Method": "Update",
+    "RelativePath": "api/categories/update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.CreateCategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
-    "Method": "CreatePriceEntry",
-    "RelativePath": "api/price-entries/add",
+    "Method": "Create",
+    "RelativePath": "api/price-entries",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -17,24 +96,8 @@
   },
   {
     "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
-    "Method": "DeletePriceEntry",
-    "RelativePath": "api/price-entries/delete",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
-    "Method": "GetPriceEntry",
-    "RelativePath": "api/price-entries/get",
+    "Method": "Get",
+    "RelativePath": "api/price-entries/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -42,12 +105,59 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "Update",
+    "RelativePath": "api/price-entries/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "PriceTracker.Models.PriceEntryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "Delete",
+    "RelativePath": "api/price-entries/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
+    "Method": "GetAll",
+    "RelativePath": "api/price-entries/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "PriceTracker.Models.PriceEntryDto",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PriceTracker.Models.PriceEntryDto, PriceTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -59,7 +169,7 @@
   },
   {
     "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
-    "Method": "GetPriceEntriesForProduct",
+    "Method": "GetByProduct",
     "RelativePath": "api/price-entries/product",
     "HttpMethod": "GET",
     "IsController": true,
@@ -82,27 +192,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "PriceTracker.Controllers.PriceEntryAPIController",
-    "Method": "UpdatePriceEntry",
-    "RelativePath": "api/price-entries/update",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "dto",
-        "Type": "PriceTracker.Models.PriceEntryDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
@@ -138,27 +227,6 @@
   },
   {
     "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
-    "Method": "LinkProductToCategory",
-    "RelativePath": "api/products/link-product-to-category",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "productId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "categoryName",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
     "Method": "GetProducts",
     "RelativePath": "api/products/products",
     "HttpMethod": "GET",
@@ -176,27 +244,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
-    "Method": "UnlinkProductFromCategory",
-    "RelativePath": "api/products/unlink-product-from-category",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "productId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "categoryName",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "PriceTracker.Controllers.ProductsAPIController",
@@ -220,7 +267,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "ContainingType": "TagsAPIController",
     "Method": "CreateTag",
     "RelativePath": "api/tags/add",
     "HttpMethod": "POST",
@@ -229,14 +276,14 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "PriceTracker.Models.TagDto",
+        "Type": "PriceTracker.Models.CreateTagDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "ContainingType": "TagsAPIController",
     "Method": "DeleteTag",
     "RelativePath": "api/tags/delete",
     "HttpMethod": "DELETE",
@@ -252,7 +299,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "ContainingType": "TagsAPIController",
     "Method": "GetTag",
     "RelativePath": "api/tags/get",
     "HttpMethod": "GET",
@@ -278,7 +325,7 @@
     ]
   },
   {
-    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "ContainingType": "TagsAPIController",
     "Method": "GetTags",
     "RelativePath": "api/tags/get-all",
     "HttpMethod": "GET",
@@ -298,7 +345,7 @@
     ]
   },
   {
-    "ContainingType": "PriceTracker.Controllers.TagsAPIController",
+    "ContainingType": "TagsAPIController",
     "Method": "UpdateTag",
     "RelativePath": "api/tags/update",
     "HttpMethod": "PUT",
@@ -312,7 +359,7 @@
       },
       {
         "Name": "dto",
-        "Type": "PriceTracker.Models.TagDto",
+        "Type": "PriceTracker.Models.CreateTagDto",
         "IsRequired": true
       }
     ],

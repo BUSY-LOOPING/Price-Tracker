@@ -1,97 +1,70 @@
-﻿using Microsoft.EntityFrameworkCore; 
-using Microsoft.AspNetCore.Mvc;
-using PriceTracker.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using PriceTracker.Interfaces;
 using PriceTracker.Models;
 
-namespace PriceTracker.Controllers
+[Route("api/tags")]
+[ApiController]
+public class TagsAPIController : ControllerBase
 {
-    [Route("api/tags")]
-    [ApiController]
-    public class TagsAPIController : ControllerBase
+    private readonly ITagService _tagService;
+
+    public TagsAPIController(ITagService tagService)
     {
-        private readonly ApplicationDbContext _context;
-
-        public TagsAPIController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        [HttpGet("get-all")]
-        public async Task<ActionResult<IEnumerable<TagDto>>> GetTags()
-        {
-            var tags = await _context.Tags
-                .Where(t => t.IsActive)
-                .Select(t => new TagDto
-                {
-                    TagId = t.TagId,
-                    Name = t.Name
-                })
-                .ToListAsync();
-
-            return Ok(tags);
-        }
-
-        [HttpGet("get")]
-        public async Task<ActionResult<TagDto>> GetTag(int id)
-        {
-            var tag = await _context.Tags.FindAsync(id);
-
-            if (tag == null || !tag.IsActive)
-                return NotFound($"Tag with ID {id} not found.");
-
-            var dto = new TagDto
-            {
-                TagId = tag.TagId,
-                Name = tag.Name
-            };
-
-            return Ok(dto);
-        }
-
-        [HttpPost("add")]
-        public async Task<ActionResult> CreateTag([FromBody] TagDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var tag = new Tag
-            {
-                Name = dto.Name,
-                IsActive = true
-            };
-
-            _context.Tags.Add(tag);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Tag created successfully", tagId = tag.TagId });
-        }
-
-        [HttpPut("update")]
-        public async Task<ActionResult> UpdateTag(int id, [FromBody] TagDto dto)
-        {
-            var tag = await _context.Tags.FindAsync(id);
-            if (tag == null || !tag.IsActive)
-                return NotFound($"Tag with ID {id} not found.");
-
-            tag.Name = dto.Name;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = $"Tag with ID {id} updated" });
-        }
-
-        [HttpDelete("delete")]
-        public async Task<ActionResult> DeleteTag(int id)
-        {
-            var tag = await _context.Tags.FindAsync(id);
-            if (tag == null || !tag.IsActive)
-                return NotFound($"Tag with ID {id} not found.");
-
-            tag.IsActive = false; // Soft delete
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = $"Tag with ID {id} deleted" });
-        }
-
+        _tagService = tagService;
     }
+
+    [HttpGet("get-all")]
+    public async Task<ActionResult<IEnumerable<TagDto>>> GetTags()
+    {
+        var tags = await _tagService.GetAllAsync();
+        return Ok(tags);
+    }
+
+    [HttpGet("get")]
+    public async Task<ActionResult<TagDto>> GetTag(int id)
+    {
+        var tag = await _tagService.GetByIdAsync(id);
+        if (tag == null)
+            return NotFound($"Tag with ID {id} not found.");
+        return Ok(tag);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> CreateTag([FromBody] CreateTagDto dto)
+    {
+        var result = await _tagService.CreateAsync(dto);
+
+        if (result.Status == ServiceResponse<TagDto>.ServiceStatus.Error)
+            return BadRequest(result.Messages);
+
+        return Ok(new { message = "Tag created successfully", tagId = result.CreatedId, data = result.Data });
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> UpdateTag(int id, [FromBody] CreateTagDto dto)
+    {
+        var result = await _tagService.UpdateAsync(id, dto);
+
+        return result.Status switch
+        {
+            ServiceResponse<TagDto>.ServiceStatus.NotFound => NotFound(result.Messages),
+            ServiceResponse<TagDto>.ServiceStatus.Error => BadRequest(result.Messages),
+            _ => Ok(new { message = "Tag updated", data = result.Data })
+        };
+    }
+
+
+    [HttpDelete("delete")]
+    public async Task<IActionResult> DeleteTag(int id)
+    {
+        var result = await _tagService.DeleteAsync(id);
+
+        return result.Status switch
+        {
+            ServiceResponse<TagDto>.ServiceStatus.NotFound => NotFound(result.Messages),
+            ServiceResponse<TagDto>.ServiceStatus.Error => BadRequest(result.Messages),
+            _ => Ok(new { message = $"Tag deleted", data = result.Data })
+        };
+    }
+
 }

@@ -18,7 +18,7 @@ namespace PriceTracker.Models
         public decimal Price { get; set; }
 
         [Required]
-        public string Source { get; set; }
+        public required string Source { get; set; }
 
         [Required]
         public DateTime RecordedAt { get; set; }
@@ -30,16 +30,16 @@ namespace PriceTracker.Models
         public int EntryId { get; set; }
 
         [Required]
-        public int ProductId { get; set; }
+        public required int ProductId { get; set; }
 
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
-        public decimal Price { get; set; }
+        public required decimal Price { get; set; }
 
         [Required]
-        public string Source { get; set; }
+        public required string Source { get; set; }
 
         [Required]
-        public DateTime RecordedAt { get; set; }
+        public required DateTime RecordedAt { get; set; }
     }
 }

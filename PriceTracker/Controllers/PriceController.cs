@@ -1,64 +1,34 @@
-﻿// Controllers/PriceController.cs
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using Microsoft.AspNetCore.Mvc;
+using PriceTracker.Interfaces;
 using PriceTracker.Models;
 using PriceTracker.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using PriceTracker.Services;
 
 namespace PriceTracker.Controllers
 {
     public class PriceController : Controller
     {
-        private readonly ProductsAPIController _productsApi;
-        private readonly PriceEntryAPIController _priceEntriesApi;
+        private readonly IProductService _productService;
+        private readonly IPriceEntryService _priceEntryService;
 
         public PriceController(
-            ProductsAPIController productsApi,
-            PriceEntryAPIController priceEntriesApi)
+            IProductService productService,
+            IPriceEntryService priceEntryService)
         {
-            _productsApi = productsApi;
-            _priceEntriesApi = priceEntriesApi;
+            _productService = productService;
+            _priceEntryService = priceEntryService;
         }
 
-        // GET: /Price/Update/{productId}
         [HttpGet]
         public async Task<IActionResult> Update(int productId)
         {
-            var prodResponse = await _productsApi.GetProducts();
-            IEnumerable<ProductDto> allProducts = null;
-
-            if (prodResponse.Value != null)
-            {
-                allProducts = prodResponse.Value;
-            }
-            else if (prodResponse.Result is OkObjectResult okProd)
-            {
-                allProducts = okProd.Value as IEnumerable<ProductDto>;
-            }
-
-            allProducts ??= new List<ProductDto>();
-            var product = allProducts.FirstOrDefault(p => p.ProductId == productId);
+            var product = await _productService.GetByIdAsync(productId);
             if (product == null)
                 return NotFound($"Product with ID {productId} not found.");
 
-            var priceEntriesResponse = await _priceEntriesApi.GetPriceEntriesForProduct(productId);
-            IEnumerable<PriceEntryDto> entries = null;
+            var priceEntries = await _priceEntryService.GetByProductIdAsync(productId);
 
-            if (priceEntriesResponse.Value != null)
-            {
-                entries = priceEntriesResponse.Value;
-            }
-            else if (priceEntriesResponse.Result is OkObjectResult okEntries)
-            {
-                entries = okEntries.Value as IEnumerable<PriceEntryDto>;
-            }
-
-            entries ??= new List<PriceEntryDto>();
-
-            var history = entries
+            var history = priceEntries
                 .OrderBy(pe => pe.RecordedAt)
                 .Select(pe => new PricePoint
                 {
@@ -71,44 +41,25 @@ namespace PriceTracker.Controllers
                 ProductId = productId,
                 ProductName = product.Name,
                 PriceHistory = history
-                // NewRecordedAt defaults to DateTime.Now
             };
 
             return View(vm);
         }
 
-        // POST: /Price/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(PriceHistoryViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                // Reload product name and history so the form can re-render
-                var prodResponse = await _productsApi.GetProducts();
-                IEnumerable<ProductDto> allProducts = null;
-
-                if (prodResponse.Value != null)
-                    allProducts = prodResponse.Value;
-                else if (prodResponse.Result is OkObjectResult okProd)
-                    allProducts = okProd.Value as IEnumerable<ProductDto>;
-
-                allProducts ??= new List<ProductDto>();
-                var product = allProducts.FirstOrDefault(p => p.ProductId == vm.ProductId);
+                var product = await _productService.GetByIdAsync(vm.ProductId);
                 if (product == null)
                     return NotFound($"Product with ID {vm.ProductId} not found.");
 
                 vm.ProductName = product.Name;
 
-                var priceEntriesResponse = await _priceEntriesApi.GetPriceEntriesForProduct(vm.ProductId);
-                IEnumerable<PriceEntryDto> entries = null;
-                if (priceEntriesResponse.Value != null)
-                    entries = priceEntriesResponse.Value;
-                else if (priceEntriesResponse.Result is OkObjectResult okEntries)
-                    entries = okEntries.Value as IEnumerable<PriceEntryDto>;
-
-                entries ??= new List<PriceEntryDto>();
-                vm.PriceHistory = entries
+                var priceEntries = await _priceEntryService.GetByProductIdAsync(vm.ProductId);
+                vm.PriceHistory = priceEntries
                     .OrderBy(pe => pe.RecordedAt)
                     .Select(pe => new PricePoint
                     {
@@ -124,16 +75,16 @@ namespace PriceTracker.Controllers
                 ProductId = vm.ProductId,
                 Price = vm.NewPrice,
                 Source = vm.NewPriceSource,
+                RecordedAt = DateTime.UtcNow
             };
 
-            
-            var createResponse = await _priceEntriesApi.CreatePriceEntry(newDto);
-            if (createResponse is BadRequestObjectResult badReq)
+            var created = await _priceEntryService.CreateAsync(newDto);
+            if(created.Status != ServiceResponse<PriceEntryDto>.ServiceStatus.Created)
             {
-                ModelState.AddModelError(string.Empty, "Failed to add new price entry.");
+                var errorMsg = created.Messages.Count > 0 ? string.Join(", ", created.Messages) : "Failed to add new price entry.";
+                ModelState.AddModelError(string.Empty, errorMsg);
                 return View(vm);
             }
-
             return RedirectToAction(nameof(Update), new { productId = vm.ProductId });
         }
     }

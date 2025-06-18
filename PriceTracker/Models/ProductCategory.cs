@@ -7,11 +7,9 @@ namespace PriceTracker.Models
     [PrimaryKey(nameof(ProductId), nameof(CategoryId))]
     public class ProductCategory
     {
-        //[Key, Column(Order = 0)]
         [Required]
         public int ProductId { get; set; }
 
-        //[Key, Column(Order = 1)]
         [Required]
         public int CategoryId { get; set; }
 
@@ -19,6 +17,6 @@ namespace PriceTracker.Models
 
         public virtual Category Category { get; set; }
 
-
     }
+
 }
