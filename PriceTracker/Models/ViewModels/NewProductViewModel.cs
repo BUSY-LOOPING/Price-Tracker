@@ -4,6 +4,7 @@ namespace PriceTracker.Models.ViewModels
 {
     public class NewProductViewModel 
     {
+        public int? ProductId { get; set; }
         bool hasData = false;
         [MaxLength(50, ErrorMessage = "Name is too long")]
         [MinLength(2, ErrorMessage = "Name is too short")]

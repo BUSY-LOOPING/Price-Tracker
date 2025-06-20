@@ -16,6 +16,8 @@ builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IPriceEntryService, PriceEntryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

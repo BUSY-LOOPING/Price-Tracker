@@ -24,6 +24,7 @@ namespace PriceTracker.Models
     {
         public int TagId { get; set; }
         public required string Name { get; set; }
+        public string? Description { get; set; }
 
     }
 

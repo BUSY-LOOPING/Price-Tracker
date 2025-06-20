@@ -19,7 +19,8 @@ public class TagService : ITagService
             .Select(t => new TagDto
             {
                 TagId = t.TagId,
-                Name = t.Name
+                Name = t.Name,
+                Description = t.Description
             })
             .ToListAsync();
     }
@@ -32,7 +33,8 @@ public class TagService : ITagService
         return new TagDto
         {
             TagId = tag.TagId,
-            Name = tag.Name
+            Name = tag.Name,
+            Description = tag.Description
         };
     }
 
@@ -96,6 +98,9 @@ public class TagService : ITagService
             response.Messages.Add($"Tag with ID {id} not found or already deleted.");
             return response;
         }
+
+        var relatedProductTags = _context.ProductTags.Where(pt => pt.TagId == id);
+        _context.ProductTags.RemoveRange(relatedProductTags);
 
         tag.IsActive = false; // Soft delete
         await _context.SaveChangesAsync();

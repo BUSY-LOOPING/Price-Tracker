@@ -1,0 +1,145 @@
+﻿@model PriceTracker.Models.ViewModels.CategoryViewModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<html>
+<head>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#121416] tracking-light text-[32px] font-bold leading-tight min-w-72">Categories</p></div>
+                    <div class="px-4 py-3 @@container">
+                        <div class="flex overflow-hidden rounded-xl border border-[#dde1e3] bg-white">
+                            <table class="flex-1">
+                                <thead>
+                                    <tr class="bg-white">
+                                        <th class="table-00ec2e08-a7e6-4668-ac4f-c1fea5f1da15-column-120 px-4 py-3 text-left text-[#121416] w-[400px] text-sm font-medium leading-normal">
+                                            Category Name
+                                        </th>
+                                        <th class="table-00ec2e08-a7e6-4668-ac4f-c1fea5f1da15-column-240 px-4 py-3 text-left text-[#121416] w-[400px] text-sm font-medium leading-normal">
+                                            Description
+                                        </th>
+                                        <th class="table-00ec2e08-a7e6-4668-ac4f-c1fea5f1da15-column-360 px-4 py-3 text-left text-[#121416] w-60 text-[#6a7681] text-sm font-medium leading-normal">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>                             
+                                    @if (Model.Categories != null && Model.Categories.Any())
+                                    {
+                                        foreach (var cat in Model.Categories)
+                                        {
+                                            <tr class="border-t border-t-[#dde1e3]">
+                                                <td class="table-00ec2e08-a7e6-4668-ac4f-c1fea5f1da15-column-120 h-[72px] px-4 py-2 w-[400px] text-[#121416] text-sm font-normal leading-normal">
+                                                    @cat.Name
+                                                </td>
+                                                <td class="table-00ec2e08-a7e6-4668-ac4f-c1fea5f1da15-column-240 h-[72px] px-4 py-2 w-[400px] text-[#6a7681] text-sm font-normal leading-normal">
+                                                    @if (!string.IsNullOrWhiteSpace(cat.Description))
+                                                    {
+                                                        <span>@cat.Description</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <em>—</em>
+                                                    }
+                                                </td>
+                                                <td class="h-[72px] px-6 py-2 w-[320px] text-[#6a7681] text-sm font-bold leading-normal tracking-[0.015em]">
+                                                    <div class="flex space-x-6 items-center whitespace-nowrap">
+                                                        <a href="@Url.Action("Edit", "Category", new { id = cat.CategoryId })" class="text-blue-600 hover:underline">
+                                                            Edit
+                                                        </a>
+
+                                                        <button onclick="openDeleteModal(@cat.CategoryId)" class="text-red-600 hover:underline">
+                                                            Delete
+                                                        </button>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center py-4 text-[#60758a] text-sm">
+                                                <em>No categories to display.</em>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                                <div class="bg-white rounded-xl shadow-lg max-w-md w-full" id="deleteModalContent">
+                                    <!-- Partial view -->
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                            @@container(max - width:120px) {
+                                .table-81702a85-600f-48cb-bd37-55dc747fba59-column-120 {
+                                    display: none;
+                                }
+                            }
+
+                            @@container(max - width:240px) {
+                                .table-81702a85-600f-48cb-bd37-55dc747fba59-column-240 {
+                                    display: none;
+                                }
+                            }
+
+                            @@container(max - width:360px) {
+                                .table-81702a85-600f-48cb-bd37-55dc747fba59-column-360 {
+                                    display: none;
+                                }
+                            }
+
+                            @@container(max - width:480px) {
+                                .table-81702a85-600f-48cb-bd37-55dc747fba59-column-480 {
+                                    display: none;
+                                }
+                            }
+
+                            @@container(max - width:600px) {
+                                .table-81702a85-600f-48cb-bd37-55dc747fba59-column-600 {
+                                    display: none;
+                                }
+                            }
+                        </style>
+                    </div>
+                    <div class="flex px-4 py-3 justify-end">
+                        <button  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#dce8f3] text-[#121416] text-sm font-bold leading-normal tracking-[0.015em]">
+                            <a href="@Url.Action("New", "Category")">
+                                <span class="truncate">Add New Category</span>
+                            </a>
+                        </button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            function openDeleteModal(tagId) {
+                fetch(`/Category/DeleteConfirm/${tagId}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('deleteModalContent').innerHTML = html;
+                        document.getElementById('deleteModal').classList.remove('hidden');
+                    });
+            }
+
+            function closeDeleteModal() {
+                document.getElementById('deleteModal').classList.add('hidden');
+            }
+        </script>
+    }
+
+</body>
+</html>

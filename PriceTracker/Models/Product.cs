@@ -35,12 +35,12 @@ namespace PriceTracker.Models
         public virtual Company Company { get; set; }
 
         // One Product → Many PriceEntries
-        public ICollection<PriceEntry>? PriceEntries { get; set; }
+        public ICollection<PriceEntry> PriceEntries { get; set; } = new List<PriceEntry>();
 
         // Many-to-Many with Category via ProductCategory
-        public ICollection<ProductCategory>? ProductCategories { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
-        public ICollection<ProductTag>? ProductTags { get; set; }
+        public ICollection<ProductTag> ProductTags { get; set; } = new List<ProductTag>();
     }
 
     public class ProductDto
@@ -87,9 +87,9 @@ namespace PriceTracker.Models
 
         public string? Condition { get; set; }
 
-        [Required]
         public int CompanyId { get; set; }
 
+        [Required]
         public string CompanyName { get; set; }
 
         [Required]

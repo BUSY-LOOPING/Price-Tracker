@@ -81,7 +81,10 @@ public class ProductService : IProductService
             CreatedAt = product.CreatedAt,
             CompanyName = product.Company.Name,
             Categories = product.ProductCategories.Select(pc => pc.Category.Name).ToList(),
-            Tags = product.ProductTags.Select(pt => pt.Tag.Name).ToList(),
+            Tags = product.ProductTags
+            .Where(pt => pt.Tag.IsActive)
+            .Select(pt => pt.Tag.Name)
+            .ToList(),
             LatestPrice = priceEntries.FirstOrDefault()?.Price,
             LatestPriceSource = priceEntries.FirstOrDefault()?.Source,
             LatestPriceRecordedAt = priceEntries.FirstOrDefault()?.RecordedAt,
@@ -97,12 +100,12 @@ public class ProductService : IProductService
     {
         var response = new ServiceResponse<ProductDto>();
 
-        var company = await _context.Companies.FirstOrDefaultAsync(c => c.CompanyId == dto.CompanyId);
+        var company = await _context.Companies.FirstOrDefaultAsync(c => c.Name.ToLower() == dto.CompanyName.ToLower());
         if (company == null)
         {
-            response.Status = ServiceResponse<ProductDto>.ServiceStatus.Error;
-            response.Messages.Add($"Company with ID {dto.CompanyId} not found.");
-            return response;
+            company = new Company { Name = dto.CompanyName };
+            _context.Companies.Add(company);
+            await _context.SaveChangesAsync();
         }
 
         var product = new Product
@@ -111,7 +114,7 @@ public class ProductService : IProductService
             Url = dto.Url,
             Description = dto.Description,
             Condition = dto.Condition?.ToString(),
-            CompanyId = dto.CompanyId,
+            CompanyId = company.CompanyId,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -128,38 +131,51 @@ public class ProductService : IProductService
         _context.PriceEntries.Add(priceEntry);
 
         // Tags
-        foreach (var tagName in dto.Tags.Distinct())
+        if (dto.Tags != null)
         {
-            var tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagName);
-            if (tag == null)
-            {
-                tag = new Tag { Name = tagName };
-                _context.Tags.Add(tag);
-                await _context.SaveChangesAsync();
-            }
-            _context.ProductTags.Add(new ProductTag
-            {
-                ProductId = product.ProductId,
-                TagId = tag.TagId
-            });
+            foreach (var tagName in dto.Tags.Distinct())
+                    {
+                        var tagNameCleaned = tagName.Trim().ToLowerInvariant();
+                        var tag = await _context.Tags.FirstOrDefaultAsync(t => t.Name == tagNameCleaned);
+                        if (tag == null)
+                        {
+                            tag = new Tag { Name = tagNameCleaned, IsActive = true };
+                            _context.Tags.Add(tag);
+                            await _context.SaveChangesAsync();
+                        } else if (!tag.IsActive)
+                        {
+                            tag.IsActive = true; 
+                            _context.Tags.Update(tag);
+                            await _context.SaveChangesAsync();
+                        }
+                        _context.ProductTags.Add(new ProductTag
+                        {
+                            ProductId = product.ProductId,
+                            TagId = tag.TagId
+                        });
+                    }
         }
-
+        
         // Categories
-        foreach (var categoryName in dto.CategoryNames.Distinct())
+        if (dto.CategoryNames != null)
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == categoryName);
-            if (category == null)
-            {
-                category = new Category { Name = categoryName };
-                _context.Categories.Add(category);
-                await _context.SaveChangesAsync();
-            }
-            _context.ProductCategories.Add(new ProductCategory
-            {
-                ProductId = product.ProductId,
-                CategoryId = category.CategoryId
-            });
+            foreach (var categoryName in dto.CategoryNames.Distinct())
+                    {
+                        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == categoryName);
+                        if (category == null)
+                        {
+                            category = new Category { Name = categoryName };
+                            _context.Categories.Add(category);
+                            await _context.SaveChangesAsync();
+                        }
+                        _context.ProductCategories.Add(new ProductCategory
+                        {
+                            ProductId = product.ProductId,
+                            CategoryId = category.CategoryId
+                        });
+                    }
         }
+        
 
         await _context.SaveChangesAsync();
 
@@ -199,22 +215,25 @@ public class ProductService : IProductService
             return response;
         }
 
-        var company = await _context.Companies.FirstOrDefaultAsync(c => c.CompanyId == dto.CompanyId);
+        var company = await _context.Companies.FirstOrDefaultAsync(c => c.Name.ToLower() == dto.CompanyName.ToLower());
         if (company == null)
         {
-            response.Status = ServiceResponse<ProductDto>.ServiceStatus.Error;
-            response.Messages.Add($"Company with ID {dto.CompanyId} not found.");
-            return response;
+            company = new Company { Name = dto.CompanyName };
+            _context.Companies.Add(company);
+            await _context.SaveChangesAsync();
         }
 
         product.Name = dto.Name;
         product.Url = dto.Url;
         product.Description = dto.Description;
         product.Condition = dto.Condition?.ToString();
-        product.CompanyId = dto.CompanyId;
+        product.CompanyId = company.CompanyId;
 
         if (product.ProductTags != null)
+        {
             _context.ProductTags.RemoveRange(product.ProductTags);
+            await _context.SaveChangesAsync();
+        }
 
         if (dto.Tags != null)
         {
@@ -236,23 +255,30 @@ public class ProductService : IProductService
         }
 
         if (product.ProductCategories != null)
-            _context.ProductCategories.RemoveRange(product.ProductCategories);
-
-        foreach (var categoryName in dto.CategoryNames.Distinct())
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == categoryName);
-            if (category == null)
-            {
-                category = new Category { Name = categoryName };
-                _context.Categories.Add(category);
-                await _context.SaveChangesAsync();
-            }
-            _context.ProductCategories.Add(new ProductCategory
-            {
-                ProductId = product.ProductId,
-                CategoryId = category.CategoryId
-            });
+            _context.ProductCategories.RemoveRange(product.ProductCategories);
+            await _context.SaveChangesAsync();
         }
+
+        if (dto.CategoryNames != null)
+        {
+            foreach (var categoryName in dto.CategoryNames.Distinct())
+                    {
+                        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == categoryName);
+                        if (category == null)
+                        {
+                            category = new Category { Name = categoryName };
+                            _context.Categories.Add(category);
+                            await _context.SaveChangesAsync();
+                        }
+                        _context.ProductCategories.Add(new ProductCategory
+                        {
+                            ProductId = product.ProductId,
+                            CategoryId = category.CategoryId
+                        });
+                    }
+        }
+        
 
         await _context.SaveChangesAsync();
 
@@ -333,7 +359,10 @@ public class ProductService : IProductService
             CompanyName = product.Company?.Name ?? "",
 
             Categories = product.ProductCategories?.Select(pc => pc.Category.Name).ToList() ?? new(),
-            Tags = product.ProductTags?.Select(pt => pt.Tag.Name).ToList() ?? new(),
+            Tags = product.ProductTags
+            .Where(pt => pt.Tag.IsActive)
+            .Select(pt => pt.Tag.Name)
+            .ToList(),
 
             LatestPrice = latest?.Price,
             LatestPriceSource = latest?.Source,

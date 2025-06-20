@@ -2,22 +2,22 @@
 {
     public class DashboardViewModel
     {
-        public List<ProductDto> TopThreeProducts { get; set; } = new();
-        //public List<CategoryRowViewModel> TopThreeCategories { get; set; } = new();
-        public List<TagDto> TopThreeTags { get; set; } = new();
+        // Counts
+        public int TotalProducts { get; set; }
+        public int TotalTags { get; set; }
+        public int TotalCategories { get; set; }
+
+        // Recent product overview (Top 5 by date)
+        public List<ProductDto> RecentProducts { get; set; } = new();
+
+        // Price trend points
+        public List<PriceTrendPoint> PriceTrends { get; set; } = new();
     }
 
-    public class CategoryRowViewModel
+    public class PriceTrendPoint
     {
-        public int CategoryId { get; set; }
-        public string Name { get; set; }
-        public int ItemsCount { get; set; }
-    }
-
-    public class TagRowViewModel
-    {
-        public int TagId { get; set; }
-        public string Name { get; set; }
-        public int ProductsCount { get; set; }
+        public DateTime RecordedAt { get; set; }
+        public decimal Price { get; set; }
+        public string ProductName { get; set; }
     }
 }

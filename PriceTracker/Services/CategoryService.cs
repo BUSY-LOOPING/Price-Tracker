@@ -20,7 +20,8 @@ namespace PriceTracker.Services
                 .Select(c => new CategoryDto
                 {
                     CategoryId = c.CategoryId,
-                    Name = c.Name
+                    Name = c.Name,
+                    Description = c.Description,
                 })
                 .ToListAsync();
         }
@@ -34,7 +35,8 @@ namespace PriceTracker.Services
                 : new CategoryDto
                 {
                     CategoryId = category.CategoryId,
-                    Name = category.Name
+                    Name = category.Name,
+                    Description = category.Description
                 };
         }
 
@@ -92,6 +94,12 @@ namespace PriceTracker.Services
                 response.Messages.Add("Category not found.");
                 return response;
             }
+
+            var relatedProductCategories = _context
+                                        .ProductCategories
+                                        .Where(x => x.CategoryId == id);
+            _context.ProductCategories.RemoveRange(relatedProductCategories);
+            await _context.SaveChangesAsync();
 
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();

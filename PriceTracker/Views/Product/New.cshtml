@@ -1,147 +1,287 @@
 ﻿@model PriceTracker.Models.ViewModels.NewProductViewModel
 @{
-    ViewData["Title"] = $"New Item";
-    Layout = "_Layout";
+    ViewData["Title"] = (Model.ProductId.HasValue ? "Update Product" : "Create New Product");
 }
 
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="gap-1 px-6 flex flex-1 justify-center py-5">               
 
-<div class="container mt-5">
-    <h2>Create New Item</h2>
-    <form asp-action="New" asp-controller="Product" method="post">
-        @Html.AntiForgeryToken()
+                <!-- Main Content -->
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="p-4">
+                        <div class="flex flex-wrap gap-2">
+                            <a class="text-[#60768a] text-base font-medium leading-normal" href="#">Products</a>
+                            <span class="text-[#60768a] text-base font-medium leading-normal">/</span>
+                            <span class="text-[#111518] text-base font-medium leading-normal">@(Model.ProductId.HasValue ? "Update" : "New") </span>
+                        </div>
 
-        <div class="form-group mb-3">
-            <label asp-for="Name" class="form-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+                        <h2 class="text-[#111418] text-[28px] font-bold leading-tight tracking-[-0.015em] mb-5"> @(Model.ProductId.HasValue ? "Update Product" : "Create New Product")</h2>
+                        <form asp-action=@(Model.ProductId.HasValue ? "Edit": "New") asp-controller="Product" method="post" novalidate>
+                            @Html.AntiForgeryToken()
+
+                            <div class="mb-4">
+                                <label asp-for="Name" class="form-label block font-semibold mb-1"></label>
+                                <input asp-for="Name" class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+                                <span asp-validation-for="Name" class="text-red-600"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="Url" class="form-label block font-semibold mb-1"></label>
+                                <input asp-for="Url" class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+                                <span asp-validation-for="Url" class="text-red-600"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="Description" class="form-label block font-semibold mb-1"></label>
+                                <textarea asp-for="Description" class="form-control w-full border border-gray-300 rounded px-3 py-2"></textarea>
+                                <span asp-validation-for="Description" class="text-red-600"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="CompanyName" class="form-label block font-semibold mb-1"></label>
+                                <input asp-for="CompanyName" class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+                                <span asp-validation-for="CompanyName" class="text-red-600"></span>
+                            </div>
+
+                            <div class=@(Model.ProductId.HasValue?"hidden":"mb-4")>
+                                <label asp-for="LatestPrice" class="form-label block font-semibold mb-1"></label>
+                                <input asp-for="LatestPrice" class="form-control w-full border border-gray-300 rounded px-3 py-2" type="number" step="0.01" />
+                                <span asp-validation-for="LatestPrice" class="text-red-600"></span>
+                            </div>
+
+                            <div class=@(Model.ProductId.HasValue?"hidden":"mb-4")>
+                                <label asp-for="LatestPriceSource" class="form-label block font-semibold mb-1"></label>
+                                <input asp-for="LatestPriceSource" class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+                                <span asp-validation-for="LatestPriceSource" class="text-red-600"></span>
+                            </div>
+                            
+                            @* <div class="mb-4"> *@
+                            @*     <label for="tagInput" class="form-label block font-semibold mb-1">Tags</label> *@
+                            @*     <input type="text" id="tagInput" class="form-control w-full border border-gray-300 rounded px-3 py-2" placeholder="Type a tag and press Enter" /> *@
+
+                            @*     <div id="tagChips" class="mt-2 flex flex-wrap gap-2"></div> *@
+
+                            @*     <input type="hidden" name="Tags" id="TagsSerialized" /> *@
+                            @*     <span asp-validation-for="Tags" class="text-red-600"></span> *@
+                            @* </div> *@
+
+                            @* <div class="mb-6"> *@
+                            @*     <label for="categoryInput" class="form-label block font-semibold mb-1">Categories</label> *@
+                            @*     <input type="text" id="categoryInput" class="form-control w-full border border-gray-300 rounded px-3 py-2" placeholder="Type a category and press Enter" /> *@
+
+                            @*     <div id="categoryChips" class="mt-2 flex flex-wrap gap-2"></div> *@
+
+                            @*     <input type="hidden" name="CategoryNames" id="CategoryNamesSerialized" /> *@
+                            @*     <span asp-validation-for="CategoryNames" class="text-red-600"></span> *@
+                            @* </div> *@
+
+                            <div class="mb-4">
+                                <label for="tagInput" class="form-label block font-semibold mb-1">Tags</label>
+                                <input type="text" id="tagInput" class="form-control w-full border border-gray-300 rounded px-3 py-2" placeholder="Type a tag and press Enter" />
+
+                                <div id="tagChips" class="mt-2 flex flex-wrap gap-2"></div>
+
+                                <span asp-validation-for="Tags" class="text-red-600"></span>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="categoryInput" class="form-label block font-semibold mb-1">Categories</label>
+                                <input type="text" id="categoryInput" class="form-control w-full border border-gray-300 rounded px-3 py-2" placeholder="Type a category and press Enter" />
+
+                                <div id="categoryChips" class="mt-2 flex flex-wrap gap-2"></div>
+
+                                <span asp-validation-for="CategoryNames" class="text-red-600"></span>
+                            </div>
+
+
+                            <button type="submit" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c7ff2] text-white text-sm font-bold leading-normal tracking-[0.015em]">@(Model.ProductId.HasValue ? "Update Product" : "Create Product")</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="form-group mb-3">
-            <label asp-for="Url" class="form-label"></label>
-            <input asp-for="Url" class="form-control" />
-            <span asp-validation-for="Url" class="text-danger"></span>
-        </div>
+    @* @section Scripts { *@
+    @*     <script> *@
+    @*             // taken help of ChatGPT for this section (for displaying chips individually) *@
+    @*             function flattenItems(items) { *@
+    @*                 const result = []; *@
+    @*                 items.forEach(item => { *@
+    @*                     if (typeof item === 'string' && item.startsWith('[') && item.endsWith(']')) { *@
+    @*                         try { *@
+    @*                             const parsed = JSON.parse(item); *@
+    @*                             if (Array.isArray(parsed)) { *@
+    @*                                 parsed.forEach(subItem => result.push(subItem)); *@
+    @*                                 return; *@
+    @*                             } *@
+    @*                         } catch { *@
+    @*                         } *@
+    @*                     } *@
+    @*                     result.push(item); *@
+    @*                 }); *@
+    @*             return result; *@
+    @*         } *@
+    @*         let categoriesRaw = @Html.Raw(Json.Serialize(Model.CategoryNames ?? new List<string>())); *@
+    @*         let tagsRaw = @Html.Raw(Json.Serialize(Model.Tags ?? new List<string>())); *@
 
-        <div class="form-group mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
+    @*         let categories = flattenItems(categoriesRaw); *@
+    @*         let tags = flattenItems(tagsRaw); *@
 
-        <div class="form-group mb-3">
-            <label asp-for="CompanyName" class="form-label"></label>
-            <input asp-for="CompanyName" class="form-control" />
-            <span asp-validation-for="CompanyName" class="text-danger"></span>
-        </div>
+    @*         const categoryInput = document.getElementById('categoryInput'); *@
+    @*         const tagInput = document.getElementById('tagInput'); *@
+    @*         const categoryChipsContainer = document.getElementById('categoryChips'); *@
+    @*         const tagChipsContainer = document.getElementById('tagChips'); *@
+    @*         const categoryHiddenInput = document.getElementById('CategoryNamesSerialized'); *@
+    @*         const tagsHiddenInput = document.getElementById('TagsSerialized'); *@
 
-        <div class="form-group mb-3">
-            <label asp-for="LatestPrice" class="form-label"></label>
-            <input asp-for="LatestPrice" class="form-control" type="number" step="0.01" />
-            <span asp-validation-for="LatestPrice" class="text-danger"></span>
-        </div>
+    @*         function updateHiddenInputs() { *@
+    @*             categoryHiddenInput.value = JSON.stringify(categories); *@
+    @*             tagsHiddenInput.value = JSON.stringify(tags); *@
+    @*         } *@
 
-        <div class="form-group mb-4">
-            <label asp-for="LatestPriceSource" class="form-label"></label>
-            <input asp-for="LatestPriceSource" class="form-control" />
-            <span asp-validation-for="LatestPriceSource" class="text-danger"></span>
-        </div>
+    @*         function renderChips(items, container, onRemove) { *@
+    @*             container.innerHTML = ''; *@
+    @*             items.forEach((item, index) => { *@
+    @*                 const chip = document.createElement('span'); *@
+    @*                 chip.className = 'badge bg-success me-2 mb-2 flex items-center gap-1 px-2 py-1 rounded text-white cursor-pointer'; *@
+    @*                 chip.textContent = item; *@
 
-        <div class="form-group mb-4">
-            <label for="tagInput" class="form-label">Tags</label>
-            <input type="text" id="tagInput" class="form-control" placeholder="Type a tag and press Enter" />
+    @*                 const removeBtn = document.createElement('button'); *@
+    @*                 removeBtn.type = 'button'; *@
+    @*                 removeBtn.className = 'btn-close btn-close-white btn-sm ms-2'; *@
+    @*                 removeBtn.setAttribute('aria-label', 'Remove'); *@
+    @*                 removeBtn.style.background = 'transparent'; *@
+    @*                 removeBtn.style.border = 'none'; *@
+    @*                 removeBtn.style.color = '#fff'; *@
+    @*                 removeBtn.style.marginLeft = '6px'; *@
+    @*                 removeBtn.style.fontWeight = 'bold'; *@
+    @*                 removeBtn.textContent = '×'; *@
+    @*                 removeBtn.onclick = () => { *@
+    @*                     onRemove(index); *@
+    @*                     renderChips(items, container, onRemove); *@
+    @*                     updateHiddenInputs(); *@
+    @*                 }; *@
 
-            <div id="tagChips" class="mt-2"></div>
+    @*                 chip.appendChild(removeBtn); *@
+    @*                 container.appendChild(chip); *@
+    @*             }); *@
+    @*         } *@
 
-            @* Hidden field to hold tags for submission *@
-            <input type="hidden" name="Tags" id="TagsSerialized" />
-            <span asp-validation-for="Tags" class="text-danger"></span>
-        </div>
+    @*         //initial page load *@
+    @*         renderChips(categories, categoryChipsContainer, (i) => categories.splice(i, 1)); *@
+    @*         renderChips(tags, tagChipsContainer, (i) => tags.splice(i, 1)); *@
+    @*         updateHiddenInputs(); *@
+    @*         categoryInput.addEventListener('keydown', function (e) { *@
+    @*             if (e.key === 'Enter') { *@
+    @*                 e.preventDefault(); *@
+    @*                 const value = categoryInput.value.trim(); *@
+    @*                 if (value && !categories.includes(value)) { *@
+    @*                     categories.push(value); *@
+    @*                     renderChips(categories, categoryChipsContainer, (i) => categories.splice(i, 1)); *@
+    @*                     updateHiddenInputs(); *@
+    @*                     categoryInput.value = ''; *@
+    @*                 } *@
+    @*             } *@
+    @*         }); *@
 
+    @*         tagInput.addEventListener('keydown', function (e) { *@
+    @*             if (e.key === 'Enter') { *@
+    @*                 e.preventDefault(); *@
+    @*                 const value = tagInput.value.trim(); *@
+    @*                 if (value && !tags.includes(value)) { *@
+    @*                     tags.push(value); *@
+    @*                     renderChips(tags, tagChipsContainer, (i) => tags.splice(i, 1)); *@
+    @*                     updateHiddenInputs(); *@
+    @*                     tagInput.value = ''; *@
+    @*                 } *@
+    @*             } *@
+    @*         }); *@
 
-        <div class="form-group mb-4">
-            <label for="categoryInput" class="form-label">Categories</label>
-            <input type="text" id="categoryInput" class="form-control" placeholder="Type a category and press Enter" />
+    @*         document.querySelector('form').addEventListener('submit', () => { *@
+    @*             updateHiddenInputs(); *@
+    @*         }); *@
+    @*     </script> *@
+    @* } *@
 
-            <div id="categoryChips" class="mt-2"></div>
+    @section Scripts {
+        <script>
+            const tags = @Html.Raw(Json.Serialize(Model.Tags ?? new List<string>()));
+            const categories = @Html.Raw(Json.Serialize(Model.CategoryNames ?? new List<string>()));
 
-            <input type="hidden" name="CategoryNames" id="CategoryNamesSerialized" />
-            <span asp-validation-for="CategoryNames" class="text-danger"></span>
-        </div>
+            const tagInput = document.getElementById('tagInput');
+            const categoryInput = document.getElementById('categoryInput');
 
+            const tagChips = document.getElementById('tagChips');
+            const categoryChips = document.getElementById('categoryChips');
 
-        <button type="submit" class="btn btn-primary">Create Item</button>
-    </form>
-</div>
+            function renderChips(array, container, fieldName) {
+                container.innerHTML = '';
+                array.forEach((item, index) => {
+                    const chip = document.createElement('span');
+                    chip.className = 'badge bg-success me-2 mb-2 flex items-center gap-1 px-2 py-1 rounded text-white cursor-pointer';
+                    chip.textContent = item;
 
-@section Scripts {
-    <script>
-        let categories = [];
-        let tags = [];
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className = 'btn-close btn-close-white btn-sm ms-2';
+                    removeBtn.setAttribute('aria-label', 'Remove');
+                    removeBtn.style.background = 'transparent';
+                    removeBtn.style.border = 'none';
+                    removeBtn.style.color = '#fff';
+                    removeBtn.style.marginLeft = '6px';
+                    removeBtn.style.fontWeight = 'bold';
+                    removeBtn.textContent = '×';
+                    removeBtn.onclick = () => {
+                        array.splice(index, 1);
+                        renderChips(array, container, fieldName);
+                    };
 
-        const categoryInput = document.getElementById('categoryInput');
-        const tagInput = document.getElementById('tagInput');
-        const categoryChipsContainer = document.getElementById('categoryChips');
-        const tagChipsContainer = document.getElementById('tagChips');
-        const categoryHiddenInput = document.getElementById('CategoryNamesSerialized');
-        const tagsHiddenInput = document.getElementById('TagsSerialized');
+                    chip.appendChild(removeBtn);
+                    container.appendChild(chip);
 
-        function updateHiddenInputs() {
-            categoryHiddenInput.value = JSON.stringify(categories);
-            tagsHiddenInput.value = JSON.stringify(tags);
-        }
+                    // Add hidden input for model binding
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = fieldName;
+                    hiddenInput.value = item;
+                    container.appendChild(hiddenInput);
+                });
+            }
+            renderChips(tags, tagChips, 'Tags');
+            renderChips(categories, categoryChips, 'CategoryNames');
 
-        function renderChips(items, container, onRemove) {
-            container.innerHTML = '';
-            items.forEach((item, index) => {
-                const chip = document.createElement('span');
-                chip.className = 'badge bg-success me-2 mb-2';
-                chip.textContent = item;
-
-                const removeBtn = document.createElement('button');
-                removeBtn.type = 'button';
-                removeBtn.className = 'btn-close btn-close-white btn-sm ms-2';
-                removeBtn.setAttribute('aria-label', 'Remove');
-                removeBtn.onclick = () => {
-                    onRemove(index);
-                    renderChips(items, container, onRemove);
-                    updateHiddenInputs();
-                };
-
-                chip.appendChild(removeBtn);
-                container.appendChild(chip);
+            tagInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const value = tagInput.value.trim();
+                    if (value && !tags.includes(value)) {
+                        tags.push(value);
+                        renderChips(tags, tagChips, 'Tags');
+                        tagInput.value = '';
+                    }
+                }
             });
-        }
 
-        categoryInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const value = categoryInput.value.trim();
-                if (value && !categories.includes(value)) {
-                    categories.push(value);
-                    renderChips(categories, categoryChipsContainer, (i) => categories.splice(i, 1));
-                    updateHiddenInputs();
-                    categoryInput.value = '';
+            categoryInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const value = categoryInput.value.trim();
+                    if (value && !categories.includes(value)) {
+                        categories.push(value);
+                        renderChips(categories, categoryChips, 'CategoryNames');
+                        categoryInput.value = '';
+                    }
                 }
-            }
-        });
+            });
 
-        tagInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const value = tagInput.value.trim();
-                if (value && !tags.includes(value)) {
-                    tags.push(value);
-                    renderChips(tags, tagChipsContainer, (i) => tags.splice(i, 1));
-                    updateHiddenInputs();
-                    tagInput.value = '';
-                }
-            }
-        });
+            document.querySelector('form').addEventListener('submit', () => {
+                renderChips(tags, tagChips, 'Tags');
+                renderChips(categories, categoryChips, 'CategoryNames');
+            });
+        </script>
+    }
 
-        // Sync hidden fields on form submit
-        document.querySelector('form').addEventListener('submit', () => {
-            updateHiddenInputs();
-        });
-    </script>
-}
-
+</body>

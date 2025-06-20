@@ -1,0 +1,14 @@
+﻿@model PriceTracker.Models.TagDto
+
+<div class="p-6">
+    <h3 class="text-xl font-semibold mb-4 text-red-600">Delete Product</h3>
+    <p>Are you sure you want to delete <strong>@Model.Name</strong>?</p>
+
+    <form asp-action="Delete" asp-controller="Tag" asp-route-id="@Model.TagId" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mt-4 flex gap-3">
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Yes, Delete</button>
+            <button type="button" onclick="closeDeleteModal()" class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Cancel</button>
+        </div>
+    </form>
+</div>

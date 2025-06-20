@@ -1,0 +1,42 @@
+﻿@model PriceTracker.Models.ViewModels.SettingsViewModel
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+            <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                <div class="p-4">
+                    <!-- Title -->
+                    <h2 class="text-[#111418] text-[28px] font-bold leading-tight tracking-[-0.015em] mb-6">App Settings</h2>
+
+                    <form asp-action="Save" asp-controller="Settings" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Theme Toggle -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold mb-2 text-[#111518]">Theme</label>
+                            <select asp-for="SelectedTheme" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm text-[#111518]">
+                                <option value="light">Light Mode</option>
+                                <option value="dark">Dark Mode</option>
+                            </select>
+                        </div>
+
+                       
+                        <div class="mb-6">
+                            <label asp-for="NotificationEmail" class="block mb-2 font-semibold text-[#111418]"></label>
+                            <input asp-for="NotificationEmail" type="email"
+                                   class="w-full border border-gray-300 rounded px-4 py-2 text-[#111418]" />
+                            <span asp-validation-for="NotificationEmail" class="text-red-600"></span>
+                        </div>
+
+                        <button type="submit" class="flex min-w-[120px] h-10 px-5 items-center justify-center bg-[#0c7ff2] text-white text-sm font-bold rounded-lg hover:bg-[#0667c4]">
+                            Save Changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

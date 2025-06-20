@@ -1,0 +1,81 @@
+﻿@using System.Text.Json
+@model PriceTracker.Models.ViewModels.PriceHistoryViewModel
+
+@{
+    ViewData["Title"] = $"Update Price – {Model.ProductName}";
+    Layout = "_Layout";
+}
+
+<div class="px-6 py-6 max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold text-[#111418] mb-4">Update Price for “@Model.ProductName”</h2>
+
+    <!-- =================== Chart Section =================== -->
+    <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+        <canvas id="priceTrendChart" width="100%" height="30px"></canvas>
+        <div class="flex justify-around">
+            @foreach (var label in Model.PriceHistory.Select(p => p.RecordedAt.ToString("MMM d")).Distinct().Take(7))
+            {
+                <p class="text-[#60758a] text-[13px] font-bold leading-normal tracking-[0.015em]">@label</p>
+            }
+        </div>
+    </div>
+
+    <!-- =================== New Price Entry Form =================== -->
+    <form asp-action="UpdatePrice" method="post" class="bg-white p-6 flex flex-col gap-4">
+        @Html.AntiForgeryToken()
+        <input asp-for="ProductId" type="hidden" />
+
+        <div>
+            <label asp-for="NewPrice" class="form-label block font-semibold mb-1"></label>
+            <input asp-for="NewPrice" type="number" step="0.01"
+                   class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+            <span asp-validation-for="NewPrice" class="text-red-600 text-sm"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPriceSource" class="form-label block font-semibold mb-1"></label>
+            <input asp-for="NewPriceSource" type="text"
+                   class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+            <span asp-validation-for="NewPriceSource" class="text-red-600 text-sm"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit"
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c7ff2] text-white text-sm font-bold leading-normal tracking-[0.015em]">
+                Save New Price
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('priceTrendChart').getContext('2d');
+
+        const priceTrendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(JsonSerializer.Serialize(Model.PriceHistory.Select(p => p.RecordedAt.ToString("MMM d")))),
+                datasets: [{
+                    label: 'Price',
+                    data: @Html.Raw(JsonSerializer.Serialize(Model.PriceHistory.Select(p => p.Price))),
+                    borderColor: '#60758a',
+                    backgroundColor: 'rgba(240,242,245,0.5)',
+                    tension: 0.4,
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+}

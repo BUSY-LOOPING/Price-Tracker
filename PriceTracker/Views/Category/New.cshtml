@@ -1,0 +1,44 @@
+﻿@model PriceTracker.Models.ViewModels.NewCategoryViewModel
+@{
+    ViewData["Title"] = (Model.CategoryId.HasValue ? "Update Category" : "Create New Category");
+}
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="gap-1 px-6 flex flex-1 justify-center py-5">               
+
+                <!-- Main Content -->
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="p-4">
+                        <div class="flex flex-wrap gap-2">
+                            <a class="text-[#60768a] text-base font-medium leading-normal" href="@Url.Action("Index", "Category")">Tags</a>
+                            <span class="text-[#60768a] text-base font-medium leading-normal">/</span>
+                            <span class="text-[#111518] text-base font-medium leading-normal">@(Model.CategoryId.HasValue ? "Update" : "New") </span>
+                        </div>
+
+                        <h2 class="text-[#111418] text-[28px] font-bold leading-tight tracking-[-0.015em] mb-5"> @(Model.CategoryId.HasValue ? "Update Tag" : "Create New Tag")</h2>
+                        <form asp-action=@(Model.CategoryId.HasValue ? "Edit": "New") asp-controller="Category" method="post" novalidate>
+                            @Html.AntiForgeryToken()
+
+                            <div class="mb-4">
+                                <label asp-for="Name" class="form-label block font-semibold mb-1"></label>
+                                <input asp-for="Name" class="form-control w-full border border-gray-300 rounded px-3 py-2" />
+                                <span asp-validation-for="Name" class="text-red-600"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="Description" class="form-label block font-semibold mb-1"></label>
+                                <textarea asp-for="Description" class="form-control w-full border border-gray-300 rounded px-3 py-2"></textarea>
+                                <span asp-validation-for="Description" class="text-red-600"></span>
+                            </div>
+
+                            <button type="submit" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c7ff2] text-white text-sm font-bold leading-normal tracking-[0.015em]">@(Model.CategoryId.HasValue ? "Update Category" : "Create Category")</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
