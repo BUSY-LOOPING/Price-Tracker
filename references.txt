@@ -1,0 +1,4 @@
+1. https://github.com/christinebittle/CoreServices
+2. Used ChatGPT for frontend Tailwind CSS
+3. Used ChatGPT for integrating mail services
+4. Used ChatGPT for delete modal
