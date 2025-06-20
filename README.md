@@ -31,22 +31,21 @@ A full-stack web application built with ASP.NET Core MVC that allows users to tr
 
 ---
 
-## 🖼️ Screenshots
-
-> - Home page
+## Screenshots
+- Home page
 ![Dashboard Screen](/img/ss1.jpg)
-> - Products page
+- Products page
 ![Products Screen](/img/ss2.jpg)
-> - Tags page
+- Tags page
 ![Tags Screen](/img/ss3.jpg)
-> - Categories page
+- Categories page
 ![Categories Screen](/img/ss4.jpg)
-> - Settings page
+- Settings page
 ![Settings Screen](/img/ss5.jpg)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -76,7 +75,7 @@ A full-stack web application built with ASP.NET Core MVC that allows users to tr
     ```
 4. Navigate to `https://localhost:<PORT>`.
 
-###  Extra Features
+##  Extra Features
 - Modal-based deletion (no page refresh)
 
 - Inline form validation
@@ -85,14 +84,14 @@ A full-stack web application built with ASP.NET Core MVC that allows users to tr
 
 - Clean chip-based input for tags and categories
 
-### Challenges Overcome
+## Challenges Overcome
 - Chip-style Inputs: Managing multiple tag/category entries dynamically with proper model binding on POST.
 
 - Soft Delete Reactivation: Ensured deleted tags/categories re-activate if reused.
 
 - Email Integration: Set up custom SMTP and email formatting without external libraries.
 
-### License
+## License
 ```
 MIT License
 
