@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: price-sql
+    env_file:
+      - .env
+    environment:
+      - ACCEPT_EULA=${ACCEPT_EULA}
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
+      - MSSQL_PID=${MSSQL_PID}
+    ports:
+      - "14330:1433" 
+    volumes:
+      - sql-data:/var/opt/mssql
+
+  pricetracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - sqlserver
+    ports:
+      - "8082:8080"  
+      - "8083:8081"
+    env_file:
+      - .env
+    environment:
+      - ConnectionStrings__PriceTrackerDb=Server=sqlserver;Database=PriceTrackerDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;
+
+volumes:
+  sql-data:
